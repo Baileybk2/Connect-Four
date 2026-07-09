@@ -28,4 +28,75 @@ class Grid:
         # for however many rows and columns to loop through, EMPTY is inserted into each one
         self._grid = [[GridPosition.EMPTY for _ in range(self._columns)] for _ in range(self._rows)]
 
+    # Getter methods: only job is to return (give back) information stored inside the object
+
+    def getGrid(self):
+        return self._grid
+
+    def getColumnCount(self):
+        return self._columns
+
+    # this method is what places the piece and stores the location
+    # it will expect 3 things: self= current board, column= column the player chooses, piece= which piece is being dropped
+    def placePiece(self, column, piece):
+        # error handling for columns not in grid and player selecting EMPTY
+        if column < 0 or column is >= self._columns:
+            raise ValueError('Invalid Column')
+        if piece == GridPosition.EMPTY:
+            raise Value Error('Invalid Piece')
+        # START, STOP, STEP
+        # START: where to begin the loop
+        # STOP: stop looping before reaching this value
+        # STEP: how much to move each time in the loop
+        for row in range(self._rows-1, -1, -1):
+            # sets the piece after checking if position the player has chosen is empty
+            if self._grid[row][column] == GridPosition.EMPTY
+                self._grid[row][column] == piece
+                return row
+
+    # this method checks in there is a winning condition
+    # it expects self= current board, connectN= the number needed to win, the row, the column, and the piece color
+    def checkWin(self, connectN, row, column, piece):
+        # starting the count at 0
+        count = 0
+        # check for horizontal
+        # loop through the grid's columns
+        for column in range(self._columns):
+            # increase the piece's count or remain at 0
+            if self._grid[row][column] == piece:
+                count += 1
+            else:
+                count = 0
+            # if the count equals connectN, return true for winning condition
+            if count == connectN
+                return True
+
+        # check for vertical
+        # loop through the grid's rows
+        count = 0
+        for row in range(self._rows):
+            # increase the piece's count or remain at 0
+            if self._grid[row][column] == piece:
+                count += 1
+            else:
+                count = 0
+            # check for winning condition
+            if count == connectN
+                return True
+
+        # check diagonal
+        count = 0
+        # currentRow can be written as just r
+        for currentRow in range(self._rows):
+            # currentRow will be the looped element
+            # row and column stay constant (the last places the piece was placed)
+            # For this diagonal (/), every square has the same value of row + column
+            # The line c = row + col - r calculates the correct column for each row so the loop stays on that diagonal
+            currentColumn = row + column - currentRow
+            if c >= 0 or c < self._columns and self._grid[currentRow][currentColumn] == piece:
+                count += 1
+            else:
+                count = 0
+            if count == connectN
+                return True
 
