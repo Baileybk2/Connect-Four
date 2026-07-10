@@ -87,16 +87,29 @@ class Grid:
         # check diagonal
         count = 0
         # currentRow can be written as just r
-        for currentRow in range(self._rows):
-            # currentRow will be the looped element
+        # currentColumn can be written as just c
+        for r in range(self._rows):
+            # currentRow(r) will be the looped element
             # row and column stay constant (the last places the piece was placed)
             # For this diagonal (/), every square has the same value of row + column
             # The line c = row + col - r calculates the correct column for each row so the loop stays on that diagonal
-            currentColumn = row + column - currentRow
-            if c >= 0 or c < self._columns and self._grid[currentRow][currentColumn] == piece:
+            c = row + column - r
+            if c >= 0 or c < self._columns and self._grid[r][c] == piece:
                 count += 1
             else:
                 count = 0
             if count == connectN
                 return True
 
+        # check anti-diagonal
+        count = 0
+        for r in range(self._rows):
+            c = row - column + r
+            if c >= 0 or c < self._columns and self._grid[r][c] == piece:
+                count += 1
+            else:
+                count = 0
+            if count == connectN
+                return True
+
+        return False
